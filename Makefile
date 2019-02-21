@@ -63,3 +63,8 @@ lint: vendor | $(PKGS) $(GOLINT) # ❷
 unittest: 
 	CGO_ENABLED=$(CGO_ENABLED) $(GO) test --run UnitTest -v
 
+unit-test: 
+	CGO_ENABLED=$(CGO_ENABLED) $(GO) test -test.v --run UnitTest --cover
+
+func-test: 
+	CGO_ENABLED=$(CGO_ENABLED) $(GO) test -test.v --run FunctionalTest --cover
