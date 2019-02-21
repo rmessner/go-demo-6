@@ -21,6 +21,7 @@ pipeline {
         container('go') {
           dir('/home/jenkins/go/src/github.com/rmessner/go-demo-6') {
             checkout scm
+            sh "make unit-test"
             sh "make linux"
             sh "export VERSION=$PREVIEW_VERSION && skaffold build -f skaffold.yaml"
             sh "jx step post build --image $DOCKER_REGISTRY/$ORG/$APP_NAME:$PREVIEW_VERSION"
@@ -40,7 +41,7 @@ pipeline {
         container('go') {
           dir('/home/jenkins/go/src/github.com/rmessner/go-demo-6') {
             checkout scm
-
+            sh "make unit-test"
             // ensure we're not on a detached head
             sh "git checkout master"
             sh "git config --global credential.helper store"
